@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#064E3B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Команда «Бумеранг» | Персональный гид по здоровью и БАД Faberlic</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-emerald-deep: #064E3B;
+      --color-emerald-main: #059669;
+      --color-emerald-light: #ECFDF5;
+    }
+    body { 
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; 
+      -webkit-tap-highlight-color: transparent;
+    }
+    h1, h2, h3, h4, .font-heading { 
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; 
+    }
+
+    /* Мобильная эргономика нажатий */
+    button, input, select, label {
+      touch-action: manipulation;
+    }
+
+    /* Бейджи серий */
+    .badge-mf { 
+      background: #022c22; 
+      color: #34d399; 
+      border: 1px solid #065f46; 
+    }
+    .badge-wn { 
+      background: #0f766e; 
+      color: #ccfbf1; 
+      border: 1px solid #14b8a6; 
+    }
+    .badge-ph { 
+      background: #365314; 
+      color: #ecfccb; 
+      border: 1px solid #65a30d; 
+    }
+    .badge-om { 
+      background: #0369a1; 
+      color: #f0f9ff; 
+      border: 1px solid #38bdf8; 
+    }
+    .badge-cl { 
+      background: #0284c7; 
+      color: #e0f2fe; 
+      border: 1px solid #38bdf8; 
+    }
+
+    /* Карточки вариантов ответов */
+    .option-card {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .option-card:active {
+      transform: scale(0.985);
+      background-color: #F0FDF4;
+      border-color: #059669;
+    }
+
+    /* Уведомление Toast */
+    #toast {
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Сегментированный переключатель сетов */
+    .segmented-btn.active {
+      background: #FFFFFF;
+      color: #065F46;
+      box-shadow: 0 2px 8px -1px rgba(0, 0, 0, 0.1), 0 1px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    /* ПЕЧАТНАЯ ВЕРСИЯ: СТРОГО 1 ЛИСТ А4 БЕЗ ИСКАЖЕНИЙ ШРИФТОВ */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 8mm 10mm 8mm 10mm;
+      }
+      *, html, body, div, p, span, h1, h2, h3, h4, li, ul, strong {
+        font-family: "Segoe UI", Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+        -webkit-font-smoothing: antialiased !important;
+        box-sizing: border-box !important;
+        letter-spacing: normal !important;
+        font-stretch: normal !important;
+      }
+      html, body {
+        background: white !important;
+        color: #111827 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        font-size: 10pt !important;
+        line-height: 1.35 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .no-print, header, #quiz-container, #toast, button, a, #sticky-bottom-bar {
+        display: none !important;
+      }
+      #app {
+        border: none !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        border-radius: 0 !important;
+      }
+      #result-container {
+        display: block !important;
+        padding: 0 !important;
+      }
+      .print-only {
+        display: block !important;
+      }
+      .print-box {
+        border: 1px solid #cbd5e1 !important;
+        border-radius: 8px !important;
+        padding: 7px 10px !important;
+        margin-bottom: 7px !important;
+        background: #f8fafc !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      .print-block-course {
+        border: 1.5px solid #059669 !important;
+        background: #ecfdf5 !important;
+        padding: 10px 12px !important;
+        margin-bottom: 8px !important;
+      }
+      #course-duration-text {
+        font-size: 10.5pt !important;
+        line-height: 1.45 !important;
+        color: #064e3b !important;
+        display: block !important;
+        font-weight: 500 !important;
+      }
+      .print-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 6px !important;
+      }
+    }
+    .print-only { display: none; }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-900 min-h-screen pb-[env(safe-area-inset-bottom,2rem)] pt-[env(safe-area-inset-top,0.5rem)] px-3 sm:px-6 flex flex-col justify-between antialiased selection:bg-emerald-100 selection:text-emerald-900">
+
+  <!-- Всплывающий Toast -->
+  <div id="toast" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-stone-900/90 backdrop-blur-md text-white text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-full shadow-2xl border border-stone-700/60 pointer-events-none opacity-0 translate-y-[-16px] flex items-center gap-2">
+    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+    <span id="toast-text">Артикулы скопированы!</span>
+  </div>
+
+  <!-- Главный контейнер карточки приложения -->
+  <div class="max-w-2xl w-full mx-auto bg-white rounded-[1.75rem] sm:rounded-3xl shadow-sm border border-stone-200/80 overflow-hidden my-1 sm:my-6 transition-all" id="app">
+    
+    <!-- Шапка приложения в современном эко-минималистичном стиле -->
+    <header class="bg-gradient-to-b from-emerald-950 via-emerald-900 to-teal-900 text-white p-5 sm:p-7 relative overflow-hidden">
+      <!-- Деликатный фоновый свет -->
+      <div class="absolute -right-12 -top-12 w-48 h-48 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10">
+        <!-- Верхняя сервисная строка -->
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <div class="inline-flex items-center gap-2 bg-white/10 border border-white/15 px-3 py-1 rounded-full backdrop-blur-md">
+            <span class="w-2 h-2 rounded-full bg-amber-300"></span>
+            <span class="text-[11px] font-bold tracking-wide text-amber-200 uppercase">Команда «Бумеранг»</span>
+            <span class="text-white/40">•</span>
+            <span class="text-[11px] font-medium text-emerald-100">Faberlic Health</span>
+          </div>
+          <span class="text-xs text-emerald-100 font-semibold bg-emerald-800/80 px-2.5 py-1 rounded-full border border-emerald-600/40" id="step-counter">Вопрос 1 из 16</span>
+        </div>
+
+        <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-white leading-snug">
+          Помощник здоровья и красоты
+        </h1>
+        <p class="text-xs sm:text-sm text-emerald-100/90 mt-1.5 leading-relaxed font-normal">
+          2 минуты честного теста покажут, почему накапливается усталость или ноет спина, и подберут натуральный комплекс БАД Faberlic.
+        </p>
+
+        <!-- Минималистичные гарантии доверия -->
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5 mt-3.5 pt-3 border-t border-white/10 text-[11px] text-emerald-100/90 font-medium">
+          <span class="flex items-center gap-1"><span class="text-emerald-400 font-bold">✓</span> Стандарты GMP & ISO</span>
+          <span class="flex items-center gap-1"><span class="text-emerald-400 font-bold">✓</span> Биодоступность до 95%</span>
+          <span class="flex items-center gap-1"><span class="text-emerald-400 font-bold">✓</span> Без наценок аптек</span>
+        </div>
+
+        <!-- Индикатор прогресса теста -->
+        <div class="w-full bg-emerald-950/60 rounded-full h-1.5 mt-4 p-0.5 border border-emerald-800/50">
+          <div class="bg-gradient-to-r from-amber-300 via-emerald-400 to-teal-300 h-1 rounded-full transition-all duration-300 ease-out" id="progress-bar" style="width: 6.25%"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Экран диагностического опроса -->
+    <main class="p-4 sm:p-7" id="quiz-container">
+      
+      <!-- Навигация опроса: кнопка Назад и категория -->
+      <div class="flex items-center justify-between mb-2">
+        <div class="flex items-center gap-1.5">
+          <button id="btn-prev-q" onclick="previousQuestion()" class="hidden text-xs font-semibold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200 transition items-center gap-1 active:scale-95">
+            ← Назад
+          </button>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-stone-500 ml-1" id="category-badge">Энергия и бодрость</span>
+        </div>
+        <span class="text-[11px] text-stone-400 font-medium">Выберите вариант</span>
+      </div>
+      
+      <h2 class="text-lg sm:text-xl font-bold text-stone-900 leading-snug mt-1" id="question-text">
+        Загрузка вопроса...
+      </h2>
+
+      <!-- Варианты ответов (Mobile Thumb-Zone оптимизация) -->
+      <div class="space-y-2.5 mt-5" id="options-container"></div>
+    </main>
+
+    <!-- Экран результатов и персональной программы -->
+    <main class="p-4 sm:p-7 hidden" id="result-container">
+      
+      <!-- ШАПКА ПАМЯТКИ НА ХОЛОДИЛЬНИК (ТОЛЬКО ДЛЯ ПЕЧАТИ А4) -->
+      <div class="print-only border-b-2 border-emerald-900 pb-2.5 mb-3">
+        <div class="flex justify-between items-end">
+          <div>
+            <div class="text-[11pt] font-black uppercase text-amber-900 tracking-wider">Команда «Бумеранг» • Faberlic Health</div>
+            <h2 class="text-[13pt] font-extrabold text-stone-900 leading-tight">Памятка на холодильник: Программа приема БАД</h2>
+            <div class="text-[10pt] font-bold text-emerald-900 mt-0.5" id="print-focus-title">Фокус: Восстановление сил и баланса</div>
+          </div>
+          <div class="text-right border border-stone-300 rounded-lg px-3 py-1.5 bg-stone-50">
+            <div class="text-[10pt] font-semibold text-stone-800 whitespace-nowrap">Дата старта: «____» ________ 202___ г.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Заголовок результатов на экране -->
+      <div class="text-center pb-4 border-b border-stone-100 no-print">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-semibold mb-2 border border-emerald-200">
+          <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+          Тест пройден! Ваша программа готова
+        </div>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-stone-900 tracking-tight" id="dominant-title">На что обратить внимание в первую очередь</h2>
+        <p class="text-xs sm:text-sm text-stone-500 mt-1 max-w-lg mx-auto leading-relaxed" id="dominant-desc">
+          Понятная программа заботы о здоровье на каждый день с официальными ценами и артикулами Faberlic.
+        </p>
+
+        <!-- Теплая эмоциональная плашка поддержки -->
+        <div class="mt-3.5 p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-emerald-50/90 to-amber-50/80 border border-emerald-200/60 text-left">
+          <div class="flex items-start gap-2.5">
+            <span class="text-base sm:text-lg">💖</span>
+            <div class="text-xs text-stone-700 leading-relaxed">
+              <strong class="text-emerald-950 font-bold block mb-0.5">Дорогая мама и хранительница очага!</strong>
+              Вы каждый день отдаете силы близким, детям и дому. Позаботиться о своем здоровье и восполнить силы — это не лишние траты, а лучший подарок всей семье!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Баланс регуляторных систем (Компактный визуализатор) -->
+      <div class="my-4 p-3.5 rounded-2xl bg-stone-50/80 border border-stone-200/70 no-print">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold text-stone-800 uppercase tracking-wide flex items-center gap-1.5">
+            <span>📊</span> Баланс сил организма:
+          </span>
+          <span class="text-[11px] text-stone-500">Где нужна поддержка</span>
+        </div>
+        <div class="space-y-2" id="health-bars"></div>
+      </div>
+
+      <!-- Сегментированный переключатель уровней набора (iOS Segmented Control с ценами) -->
+      <div class="my-4 no-print">
+        <div class="text-xs font-bold text-stone-700 mb-1.5 flex items-center justify-between">
+          <span>Выберите подходящий набор:</span>
+          <span class="text-[11px] text-emerald-700 font-semibold">3 варианта по бюджету</span>
+        </div>
+        <div class="grid grid-cols-3 gap-1.5 p-1 bg-stone-100 rounded-2xl border border-stone-200/60">
+          <button onclick="selectTier('premium')" id="tab-premium" class="segmented-btn py-2.5 px-1.5 text-center rounded-xl transition font-bold text-stone-600 hover:text-stone-900 text-xs">
+            <span class="block">Премиум</span>
+            <span class="text-[10px] opacity-80 block font-normal" id="tier-price-premium">...</span>
+          </button>
+          <button onclick="selectTier('basic')" id="tab-basic" class="segmented-btn active py-2.5 px-1.5 text-center rounded-xl transition font-bold text-stone-600 hover:text-stone-900 text-xs">
+            <span class="block">Базовый</span>
+            <span class="text-[10px] opacity-80 block font-normal" id="tier-price-basic">...</span>
+          </button>
+          <button onclick="selectTier('minimum')" id="tab-minimum" class="segmented-btn py-2.5 px-1.5 text-center rounded-xl transition font-bold text-stone-600 hover:text-stone-900 text-xs">
+            <span class="block">Минимум</span>
+            <span class="text-[10px] opacity-80 block font-normal" id="tier-price-minimum">...</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Переключатели Smart-Save и Скидки 20% (Элегантные переключатели) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 my-3.5 no-print">
+        
+        <!-- Smart-Save -->
+        <div class="flex items-center justify-between p-3 rounded-2xl bg-amber-50/70 border border-amber-200/70">
+          <div class="flex items-center gap-2">
+            <span class="w-7 h-7 rounded-lg bg-amber-500/15 text-amber-800 flex items-center justify-center text-xs flex-shrink-0">🌿</span>
+            <div>
+              <div class="text-xs font-bold text-amber-950">Эконом-вариант Smart-Save</div>
+              <div class="text-[10px] text-amber-800/80 leading-tight">Заменить часть формул на чаи Herbal Tea</div>
+            </div>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer flex-shrink-0 ml-2">
+            <input type="checkbox" id="economy-toggle" onchange="toggleEconomy()" class="sr-only peer">
+            <div class="w-10 h-5 bg-stone-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-600"></div>
+          </label>
+        </div>
+
+        <!-- Скидка 20% -->
+        <div class="flex items-center justify-between p-3 rounded-2xl bg-emerald-50/70 border border-emerald-200/70">
+          <div class="flex items-center gap-2">
+            <span class="w-7 h-7 rounded-lg bg-emerald-500/15 text-emerald-800 flex items-center justify-center text-xs flex-shrink-0 font-bold">%</span>
+            <div>
+              <div class="text-xs font-bold text-emerald-950">Скидка консультанта/клиента</div>
+              <div class="text-[10px] text-emerald-800/80 leading-tight">Применить скидку -20% от каталога</div>
+            </div>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer flex-shrink-0 ml-2">
+            <input type="checkbox" id="discount-toggle" onchange="toggleDiscount()" class="sr-only peer" checked>
+            <div class="w-10 h-5 bg-stone-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-600"></div>
+          </label>
+        </div>
+
+      </div>
+
+      <!-- Список карточек товаров (Чистый, современный вид) -->
+      <div class="space-y-2.5 my-4 no-print" id="products-list"></div>
+
+      <!-- Блок стоимости и быстрых действий -->
+      <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-emerald-950 via-emerald-900 to-teal-950 text-white shadow-lg mb-5 border border-emerald-800/40 no-print">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span class="text-[11px] text-emerald-300 font-semibold tracking-wider uppercase block">Итоговая стоимость набора</span>
+            <span class="text-xs text-stone-300 font-medium" id="savings-badge">С учетом скидки 20%</span>
+            <div class="flex flex-wrap items-center gap-2 mt-1">
+              <span class="text-[11px] text-emerald-400 font-semibold" id="retail-compare-price"></span>
+              <span class="text-[10px] bg-amber-400/20 text-amber-200 border border-amber-300/30 px-2.5 py-0.5 rounded-full font-bold" id="points-badge">~25 Баллов</span>
+            </div>
+          </div>
+          <div class="text-left sm:text-right border-t sm:border-t-0 pt-2 sm:pt-0 border-emerald-800/50">
+            <span class="text-2xl sm:text-3xl font-black text-white tracking-tight block" id="total-price">0 ₽</span>
+            <span class="text-xs font-bold text-amber-300 block mt-0.5" id="price-per-day-badge">Инвестиция в себя: всего ~54 ₽ в день</span>
+          </div>
+        </div>
+
+        <!-- Подарок новичка -->
+        <div class="mt-3.5 p-2.5 rounded-xl bg-white/10 border border-amber-300/30 flex items-center gap-2 text-xs text-amber-100">
+          <span class="text-base">🎁</span>
+          <div>
+            <strong>Приятный бонус:</strong> при заказе любого набора от 1 500 ₽ вы получаете скидку 20% + <strong>подарок новичка</strong> от компании Faberlic!
+          </div>
+        </div>
+
+        <!-- Кнопки действий -->
+        <div class="mt-4 pt-3.5 border-t border-emerald-800/50 flex flex-wrap gap-2 items-center justify-between">
+          <button onclick="copyArticlesToClipboard()" class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 transition border border-white/15 text-xs font-bold text-emerald-100 flex items-center justify-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            Скопировать артикулы
+          </button>
+          <button onclick="printChecklist()" class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-95 transition text-stone-950 text-xs font-black flex items-center justify-center gap-1.5 shadow-sm">
+            <span>🖨️</span> Памятка на холодильник (А4)
+          </button>
+          <button onclick="shareRecommendation()" class="w-full sm:w-auto px-4 py-2 rounded-xl bg-emerald-600/40 hover:bg-emerald-600/60 active:scale-95 transition border border-emerald-400/30 text-xs font-bold text-white flex items-center justify-center gap-1.5">
+            <span>💬</span> Сохранить подбор команды «Бумеранг»
+          </button>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- БЛОКИ ПАМЯТКИ НА ХОЛОДИЛЬНИК (ПЕЧАТАЮТСЯ И ОТОБРАЖАЮТСЯ НА ЭКРАНЕ) -->
+      <!-- ========================================================================= -->
+
+      <!-- БЛОК 1: Сколько времени принимать курс? -->
+      <div class="p-3.5 sm:p-4 rounded-xl bg-emerald-50/90 border border-emerald-300 mb-3 print-box print-block-course">
+        <div class="flex items-center gap-1.5 mb-1">
+          <span class="text-sm">🗓️</span>
+          <h4 class="text-xs sm:text-sm font-bold text-emerald-950 uppercase tracking-wide">Сколько времени принимать курс?</h4>
+        </div>
+        <div class="text-xs sm:text-sm text-stone-800 leading-normal font-normal" id="course-duration-text">
+          Оптимальный базовый курс для клеток организма — <strong>от 30 до 60 дней</strong> (1–2 упаковки). Хондропротекторам для суставов и морскому коллагену требуется от 2 до 3 месяцев для стойкого обновления хрящевого каркаса и связок. После курса сделайте перерыв 3–4 недели.
+        </div>
+      </div>
+
+      <!-- БЛОК 2: Расписание приема: как пить в течение дня -->
+      <div class="border-t border-stone-200 pt-3 print:border-none print:pt-0">
+        <div class="flex justify-between items-center mb-1.5">
+          <h3 class="text-xs sm:text-base font-bold text-stone-900 flex items-center gap-1.5">
+            <span>🕒</span> Расписание приема: как пить в течение дня
+          </h3>
+          <span class="print-only text-[9pt] text-stone-600 font-semibold">Ставьте галочки каждый день: [ ✓ ]</span>
+        </div>
+        <p class="text-[11px] sm:text-xs text-stone-500 mb-2.5 leading-relaxed no-print">
+          Чтобы капсулы не спорили друг с другом, мы разделили их по времени суток: для бодрости — утром, для суставов — в обед, для спокойствия — вечером.
+        </p>
+        
+        <!-- Сетка приема (Утро, День, Вечер) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-2.5 print-grid" id="schedule-blocks"></div>
+        
+        <!-- Карточки препаратов с правилами приема -->
+        <div class="space-y-1.5 mb-2.5" id="clinical-details"></div>
+      </div>
+
+      <!-- БЛОК 3: Золотые правила для хозяюшек -->
+      <div class="p-3 sm:p-3.5 rounded-xl bg-amber-50/80 border border-amber-200/80 text-xs text-stone-800 space-y-1 mb-2.5 print-box">
+        <div class="font-bold text-amber-950 flex items-center gap-1 text-xs mb-1">
+          <span>💡</span> 3 простых правила для максимальной пользы:
+        </div>
+        <p>• <strong>Витамин Д3 дружит с полезными жирами:</strong> Пейте D3+K2 и Омегу вместе во время завтрака (например, с кашей со сливочным маслом, сыром или яичницей). Так витамин Д усвоится почти на 100%.</p>
+        <p>• <strong>Коллаген любит одиночество:</strong> Пейте Collagen Marine утром натощак — за полчаса до завтрака со стаканом чуть теплой воды. Натощак он пойдет прямиком в кожу и суставы!</p>
+        <p>• <strong>Вечерний чай пейте отдельно от кофе и молока:</strong> Травяные настои («Антистресс» и «Очищение») пейте за 40 минут до сна в спокойной обстановке для мягкого расслабления.</p>
+      </div>
+
+      <!-- БЛОК 4: С чем БАДы не дружат -->
+      <div class="p-3 sm:p-3.5 rounded-xl bg-rose-50/80 border border-rose-200/80 text-xs text-rose-950 space-y-1 mb-3 print-box">
+        <div class="font-bold text-rose-900 flex items-center gap-1 text-xs mb-1">
+          <span>🚫</span> С чем БАДы не дружат (чтобы не пить впустую):
+        </div>
+        <p>• <strong>Не запивайте капсулы кофе или крепким чаем:</strong> Танины связывают минералы и не дают им усвоиться. Запивайте только чистой негазированной водой комнатной температуры.</p>
+        <p>• <strong>Разделяйте с лекарствами:</strong> Если врач назначил антибиотики или сердечные препараты, делайте паузу между ними и БАД минимум 1,5–2 часа.</p>
+      </div>
+
+      <!-- ПОДСКАЗКА ПО ПИТАНИЮ (СКРЫТА ПРИ ПЕЧАТИ) -->
+      <div class="p-3.5 rounded-2xl bg-lime-50/80 border border-lime-200/80 text-xs text-stone-700 mb-3 no-print" id="food-tips-box">
+        <div class="font-bold text-lime-950 flex items-center gap-1.5 text-xs mb-1.5">
+          <span>🥗</span> Подсказка от нутрициолога: что положить в тарелку
+        </div>
+        <div class="space-y-1 text-xs leading-relaxed" id="food-tips-content"></div>
+      </div>
+
+      <!-- Калькулятор воды (на экране) -->
+      <div class="p-3.5 rounded-2xl bg-blue-50/70 border border-blue-200/70 mb-3.5 no-print">
+        <div class="flex items-center justify-between mb-1.5">
+          <div class="flex items-center gap-1.5">
+            <span class="text-sm">💧</span>
+            <span class="text-xs font-bold text-blue-950">Сколько простой воды пить в день</span>
+          </div>
+          <span class="text-[10px] text-blue-700 font-medium">1 стакан на 8–10 кг</span>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center gap-2 mt-1">
+          <div class="flex items-center gap-2">
+            <label for="user-weight" class="text-xs text-stone-600 font-medium">Ваш примерный вес:</label>
+            <input type="number" id="user-weight" value="68" min="40" max="160" oninput="calculateWaterIntake()" class="w-16 px-2.5 py-1 text-xs font-bold rounded-lg border border-blue-200 bg-white text-center focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <span class="text-xs text-stone-500 font-medium">кг</span>
+          </div>
+          <div class="text-xs text-blue-900 font-semibold" id="water-result">
+            Ваша норма: <strong>~2.0 литра чистой воды в день</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Почему БАДы Faberlic превосходят аптеку (на экране) -->
+      <div class="my-4 p-3.5 sm:p-4 rounded-2xl bg-stone-50 border border-stone-200/80 no-print">
+        <h3 class="text-xs sm:text-sm font-extrabold text-stone-900 mb-2.5 flex items-center gap-1.5">
+          <span>🌿</span> Почему выбирают БАДы Faberlic, а не аптеку?
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+          <div class="p-2.5 rounded-xl bg-white border border-stone-200/80">
+            <div class="font-bold text-emerald-900 mb-0.5 flex items-center gap-1 text-[11px]">
+              <span>🧬</span> Усвоение до 95%
+            </div>
+            <p class="text-stone-600 text-[11px] leading-relaxed">
+              Запатентованный BioPerine® доставляет полезные экстракты прямо в клетки, предотвращая выведение «впустую».
+            </p>
+          </div>
+          <div class="p-2.5 rounded-xl bg-white border border-stone-200/80">
+            <div class="font-bold text-emerald-900 mb-0.5 flex items-center gap-1 text-[11px]">
+              <span>🏷️</span> Честная цена завода
+            </div>
+            <p class="text-stone-600 text-[11px] leading-relaxed">
+              Без наценки аптечных сетей (200–300%). Прямые поставки со стандартами GMP и ISO институтов РФ.
+            </p>
+          </div>
+          <div class="p-2.5 rounded-xl bg-white border border-stone-200/80">
+            <div class="font-bold text-emerald-900 mb-0.5 flex items-center gap-1 text-[11px]">
+              <span>🛡️</span> Чистый эко-состав
+            </div>
+            <p class="text-stone-600 text-[11px] leading-relaxed">
+              Без диоксида титана, скрытого мела и синтетических красителей. Только натуральная природная польза.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Отзывы реальных женщин (на экране) -->
+      <div class="my-4 p-3.5 sm:p-4 rounded-2xl bg-amber-50/50 border border-amber-200/60 no-print">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-xs sm:text-sm font-extrabold text-amber-950 flex items-center gap-1.5">
+            <span>⭐</span> Отзывы женщин из команды «Бумеранг»
+          </h3>
+          <span class="text-[10px] text-amber-800 font-semibold">14 000+ отзывов</span>
+        </div>
+        <div class="space-y-2 text-xs">
+          <div class="p-2.5 rounded-xl bg-white border border-amber-200/70">
+            <div class="flex justify-between items-baseline mb-0.5 text-[11px]">
+              <span class="font-bold text-stone-900">Елена С., 42 года (учитель начальных классов)</span>
+              <span class="text-amber-500 font-bold">★★★★★</span>
+            </div>
+            <p class="text-stone-600 text-[11px] leading-relaxed">
+              «К четвертому уроку голова буквально раскалывалась. Пропила курс "Антистресс" и D3+K2 — будто второе дыхание открылось: сплю крепко, перестала нервничать и срываться на близких!»
+            </p>
+          </div>
+          <div class="p-2.5 rounded-xl bg-white border border-amber-200/70">
+            <div class="flex justify-between items-baseline mb-0.5 text-[11px]">
+              <span class="font-bold text-stone-900">Татьяна К., 49 лет (домохозяйка)</span>
+              <span class="text-amber-500 font-bold">★★★★★</span>
+            </div>
+            <p class="text-stone-600 text-[11px] leading-relaxed">
+              «Было жалко тратить деньги на себя. Но посчитала, что курс стоит всего 55 рублей в день — чашка чая в буфете дороже! Теперь просыпаюсь со свежим лицом и энергией».
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Забота о безопасности (на экране) -->
+      <div class="mt-3.5 p-3.5 rounded-xl bg-stone-50 border border-stone-200 text-[11px] text-stone-600 space-y-1 leading-relaxed no-print">
+        <div class="font-bold text-stone-800 flex items-center gap-1 text-[11px]">
+          <span>🌸</span> Забота о вашей безопасности:
+        </div>
+        <p>• БАД — не лекарство, а концентрированное питание для клеток. При беременности или хронических болезнях посоветуйтесь с врачом.</p>
+        <p>• При наличии камней в желчном пузыре травы для печени (артишок, расторопша) принимайте с одобрения врача.</p>
+      </div>
+
+      <!-- Кнопки действий (на экране) -->
+      <div class="flex flex-col sm:flex-row gap-2.5 items-center justify-between mt-5 pt-4 border-t border-stone-100 no-print">
+        <button onclick="restartQuiz()" class="w-full sm:w-auto px-4 py-2.5 text-xs font-bold text-stone-500 hover:text-stone-900 active:scale-95 transition flex items-center justify-center gap-1">
+          ↺ Пройти тест заново
+        </button>
+        <a href="https://faberlic.com" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto text-center px-7 py-3 bg-emerald-700 hover:bg-emerald-800 active:scale-95 text-white text-xs sm:text-sm font-bold rounded-xl shadow-md transition">
+          Заказать на официальном сайте Faberlic
+        </a>
+      </div>
+
+      <!-- Фирменный подвал команды (на экране) -->
+      <div class="text-center pt-5 mt-5 border-t border-stone-100 no-print">
+        <p class="text-[11px] text-stone-400 font-medium">
+          Разработано специально для партнеров и клиентов <strong class="text-stone-600">Команды «Бумеранг»</strong>
+        </p>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // 16 вопросов на простом и понятном языке
+    const questions = [
+      { text: "Как вы чувствуете себя по энергии в течение обычного дня?", cat: "energy",
+        opts: [
+          { t: "Сил хватает на все домашние дела и работу до самого вечера", w: 0, tag: "Отлично", level: "low" },
+          { t: "После обеда наваливается сонливость, тянет выпить кофе или съесть шоколадку", w: 1, tag: "Усталость", level: "mid" },
+          { t: "Просыпаюсь уже уставшей, тяжело заставить себя что-то делать", w: 3, tag: "Нет сил", level: "high" }
+        ] 
+      },
+      { text: "Как вы обычно засыпаете и как спите по ночам?", cat: "stress",
+        opts: [
+          { t: "Засыпаю быстро, сплю крепко, утром встаю легко", w: 0, tag: "Крепкий сон", level: "low" },
+          { t: "Долго ворочаюсь, прокручиваю мысли в голове, чутко реагирую на звуки", w: 1, tag: "Чуткий сон", level: "mid" },
+          { t: "Часто просыпаюсь среди ночи с тревогой, тяжело снова уснуть, утром разбитая", w: 3, tag: "Бессонница", level: "high" }
+        ] 
+      },
+      { text: "Бывает ли ощущение, что нервы на пределе или опускаются руки?", cat: "stress",
+        opts: [
+          { t: "Спокойно отношусь к бытовым неурядицам, настроение ровное", w: 0, tag: "Спокойствие", level: "low" },
+          { t: "Иногда срываюсь на домашних из-за мелочей, внутри копится раздражение", w: 1, tag: "Нервы", level: "mid" },
+          { t: "Постоянное чувство тревоги, ком в горле, зажаты плечи и шея, ничего не радует", w: 3, tag: "Выгорание", level: "high" }
+        ] 
+      },
+      { text: "Бывает ли чувство тяжести в животе после завтрака или обеда?", cat: "gastro",
+        opts: [
+          { t: "Всегда легко и комфортно, еда переваривается незаметно", w: 0, tag: "Легкость", level: "low" },
+          { t: "Бывает тяжесть, легкая изжога или отрыжка после жирного или мучного", w: 1, tag: "Тяжесть", level: "mid" },
+          { t: "Живот будто раздувает от любой еды, спазмы и дискомфорт даже от воды", w: 3, tag: "Дискомфорт", level: "high" }
+        ] 
+      },
+      { text: "Беспокоит ли вас вздутие живота к вечеру или задержка стула?", cat: "gastro",
+        opts: [
+          { t: "Кишечник работает как часы каждое утро, вздутия нет", w: 0, tag: "Норма", level: "low" },
+          { t: "К вечеру живот становится плотным, брюки или юбка начинают давить", w: 1, tag: "Вздутие", level: "mid" },
+          { t: "Постоянные запоры или нерегулярный стул, живот постоянно надут как шарик", w: 3, tag: "Застой", level: "high" }
+        ] 
+      },
+      { text: "Замечаете ли горечь во рту по утрам или неприятную тяжесть в правом боку?", cat: "gastro",
+        opts: [
+          { t: "Никаких неприятных ощущений, дыхание свежее", w: 0, tag: "Чистота", level: "low" },
+          { t: "Бывает тяжесть в боку после жареного, праздничных застолий или сладкого", w: 1, tag: "Тяжесть в боку", level: "mid" },
+          { t: "Часто горечь во рту по утрам, налет на языке, пью много лекарств от головной боли/простуд", w: 3, tag: "Печень устала", level: "high" }
+        ] 
+      },
+      { text: "Хрустят ли колени, когда приседаете, или ноет спина после уборки?", cat: "joints",
+        opts: [
+          { t: "Легко двигаюсь, суставы гибкие и безболезненные", w: 0, tag: "Гибкость", level: "low" },
+          { t: "Колени похрустывают на лестнице, по утрам спина кажется слегка деревянной", w: 1, tag: "Хруст", level: "mid" },
+          { t: "Суставы ноют на погоду или после долгой ходьбы, трудно вставать со стула", w: 3, tag: "Ноют суставы", level: "high" }
+        ] 
+      },
+      { text: "Сводит ли икры по ночам? Не стали ли ногти ломкими и мягкими?", cat: "joints",
+        opts: [
+          { t: "Ногти крепкие, судорог в мышцах не бывает", w: 0, tag: "Крепкие", level: "low" },
+          { t: "Иногда дергается веко, ногти слоятся, волосы стали расти медленнее", w: 1, tag: "Ломкость", level: "mid" },
+          { t: "Часто сводит судорогой икры ног ночью, эмаль зубов стала чувствительной к холодному", w: 3, tag: "Судороги", level: "high" }
+        ] 
+      },
+      { text: "Как ваше самочувствие при смене погоды? Бывают ли перепады давления?", cat: "cardio",
+        opts: [
+          { t: "Давление как у космонавта, погода за окном не влияет на настроение", w: 0, tag: "Норма", level: "low" },
+          { t: "Голова реагирует на дождь и ветер, руки и ноги часто холодные как лед", w: 1, tag: "Метеозависимость", level: "mid" },
+          { t: "Давление скачет, сердце может внезапно сильно забиться, одышка при подъеме на этаж", w: 3, tag: "Скачки давления", level: "high" }
+        ] 
+      },
+      { text: "Бывает ли отечность под глазами с утра или следы от носочков на щиколотках?", cat: "cardio",
+        opts: [
+          { t: "Отеков нет, лицо с утра свежее", w: 0, tag: "Свежесть", level: "low" },
+          { t: "К вечеру обувь становится тесноватой, на щиколотках остаются полоски от носков", w: 1, tag: "Отечность ног", level: "mid" },
+          { t: "Утром выраженные мешки под глазами, кольца на пальцы не налезают, вода застаивается", w: 3, tag: "Застой воды", level: "high" }
+        ] 
+      },
+      { text: "Как часто вы простужаетесь или подхватываете вирусы от детей/в транспорте?", cat: "energy",
+        opts: [
+          { t: "Болею очень редко (раз в год или даже реже переношу на ногах)", w: 0, tag: "Крепкий иммунитет", level: "low" },
+          { t: "2–3 раза за осень и зиму: насморк тянется неделями, слабость", w: 1, tag: "Частые простуды", level: "mid" },
+          { t: "Стоит кому-то чихнуть — сразу заболеваю, часто вскакивает герпес на губах", w: 3, tag: "Слабенький иммунитет", level: "high" }
+        ] 
+      },
+      { text: "Беспокоит ли сухость кожи на лице и руках? Не сыплются ли волосы?", cat: "joints",
+        opts: [
+          { t: "Кожа мягкая и гладкая, волосы густые, не выпадают", w: 0, tag: "Упругая кожа", level: "low" },
+          { t: "Кожу стягивает после умывания водой, крем нужен постоянно, волосы тусклые", w: 1, tag: "Сухость кожи", level: "mid" },
+          { t: "Волосы остаются на расческе клочьями, кожа потеряла упругость, заметны морщинки", w: 3, tag: "Выпадение волос", level: "high" }
+        ] 
+      },
+      { text: "Много ли времени вы проводите за телефоном, планшетом или телевизором?", cat: "energy",
+        opts: [
+          { t: "Немного (до 2 часов), глаза совершенно не устают", w: 0, tag: "Ясный взгляд", level: "low" },
+          { t: "4–6 часов: к вечеру в глазах будто насыпан сухой песок, хочется потереть", w: 1, tag: "Сухость глаз", level: "mid" },
+          { t: "Весь день у экранов: глаза краснеют, лопаются сосудики, к вечеру все плывет", w: 3, tag: "Усталость глаз", level: "high" }
+        ] 
+      },
+      { text: "Тянет ли вас на сладенькое, конфетки, печенье или частые перекусы?", cat: "gastro",
+        opts: [
+          { t: "К сладкому равнодушна, легко обхожусь без конфет и десертов", w: 0, tag: "Без тяги", level: "low" },
+          { t: "Когда устаю или понервничаю, обязательно хочется чайка с чем-то сладеньким", w: 1, tag: "Тяга к сладкому", level: "mid" },
+          { t: "Вечером нападает настоящий жор, не могу остановиться, лишний вес скапливается на талии", w: 3, tag: "Вечерний аппетит", level: "high" }
+        ] 
+      },
+      { text: "Живете ли вы в крупном городе с выхлопными газами, в суете или среди курящих?", cat: "energy",
+        opts: [
+          { t: "Чистый воздух, лес или дача рядом, спокойный ритм жизни", w: 0, tag: "Чистый воздух", level: "low" },
+          { t: "Обычный город, много времени провожу в квартире, мало гуляю на свежем воздухе", w: 1, tag: "Городской быт", level: "mid" },
+          { t: "Загазованный мегаполис, пыль, курение (активное или пассивное), вечный стресс", w: 3, tag: "Пыль и смог", level: "high" }
+        ] 
+      },
+      { text: "Пьете ли вы сейчас хорошую Омегу (рыбий жир) и витамин Д каждый день?", cat: "cardio",
+        opts: [
+          { t: "Да, пью регулярно и круглый год, слежу за этим", w: 0, tag: "Пью постоянно", level: "low" },
+          { t: "Иногда покупаю баночку, но часто забываю пить вовремя", w: 1, tag: "Забываю", level: "mid" },
+          { t: "Вообще не принимаю, жирную морскую рыбу на столе едим редко", w: 3, tag: "Не пью совсем", level: "high" }
+        ] 
+      }
+    ];
+
+    // Выверенный каталог продукции Faberlic с точными артикулами
+    const productsCatalog = {
+      antistress: {
+        id: "antistress",
+        name: "БАД «Антистресс» Molecular Force",
+        art: "15844",
+        price: 1439,
+        series: "Molecular Force",
+        badgeClass: "badge-mf",
+        img: "images/15844.jpg",
+        timing: "Вечером (2 капсулы во время ужина)",
+        purpose: "Снимает нервное напряжение, помогает не срываться на близких и дарит душевный покой без сонливости и вялости.",
+        impact: "Цветок пассифлоры и 5-HTP бережно успокаивают нервную систему, а BioPerine® ускоряет усвоение трав.",
+        cautions: "Индивидуальная непереносимость трав. Если пьете рецептурные успокоительные, посоветуйтесь с врачом.",
+        alt: {
+          name: "Травяной сбор «Антистресс» Herbal Tea",
+          art: "15668",
+          price: 249,
+          series: "Herbal Tea",
+          badgeClass: "badge-ph",
+          img: "images/15668.jpg",
+          purpose: "Ароматный травяной чай для спокойного, уютного вечера после тяжелого дня.",
+          impact: "Мелисса, валериана и мята мягко расслабляют тело и готовят ко сну.",
+          cautions: "Аллергия на душистые травы."
+        }
+      },
+      sleep: {
+        id: "sleep",
+        name: "БАД «Поддержка сна и биоритмов» Molecular Force",
+        art: "15847",
+        price: 1519,
+        series: "Molecular Force",
+        badgeClass: "badge-mf",
+        img: "images/15847.jpg",
+        timing: "На ночь (1 капсула за 30-40 мин до сна)",
+        purpose: "Помогает быстро и легко уснуть, не просыпаться от каждого шороха посреди ночи и вставать со свежей головой.",
+        impact: "Растительный мелатонин нормализует глубокий сон, а калифорнийский мак снимает ночную тревожность.",
+        cautions: "После приема не садитесь за руль автомобиля.",
+        alt: {
+          name: "Травяной сбор «Антистресс» Herbal Tea",
+          art: "15668",
+          price: 249,
+          series: "Herbal Tea",
+          badgeClass: "badge-ph",
+          img: "images/15668.jpg",
+          purpose: "Натуральный вечерний настой для естественного засыпания.",
+          impact: "Облегчает расслабление нервной системы перед сном.",
+          cautions: "Индивидуальная чувствительность к компонентам."
+        }
+      },
+      q10: {
+        id: "q10",
+        name: "БАД «Коэнзим Q10» Molecular Force",
+        art: "15837",
+        price: 962,
+        series: "Molecular Force",
+        badgeClass: "badge-mf",
+        img: "images/15837.jpg",
+        timing: "Утром (1 капсула во время завтрака)",
+        purpose: "Главная батарейка бодрости для каждой клеточки: поддерживает силы сердца, дает энергию и сохраняет молодость кожи.",
+        impact: "Коэнзим Q10 питает сердце и митохондрии клеток, дигидрокверцетин укрепляет сосуды.",
+        cautions: "Пейте обязательно во время завтрака с полезными жирами (масло, сыр, яйцо). Натощак не пить."
+      },
+      omega: {
+        id: "omega",
+        name: "БАД «Омега 3-6-9» Faberlic",
+        art: "16217",
+        price: 999,
+        series: "Omega",
+        badgeClass: "badge-om",
+        img: "images/16217.jpg",
+        timing: "Утром (1–2 капсулы с едой)",
+        purpose: "Полезные жиры для шелковистых волос, гладкой кожи, чистых сосудов и ясной памяти.",
+        impact: "Рыбий жир и растительные масла омега 3-6-9 увлажняют кожу изнутри и очищают сосуды.",
+        cautions: "С осторожностью при нарушении свертываемости крови."
+      },
+      joints: {
+        id: "joints",
+        name: "БАД «Поддержка суставов» Molecular Force",
+        art: "15833",
+        price: 1039,
+        series: "Molecular Force",
+        badgeClass: "badge-mf",
+        img: "images/15833.jpg",
+        timing: "В обед (1 капсула во время еды)",
+        purpose: "Питание и смазка для суставов: убирает хруст в коленях, утреннюю скованность и возвращает легкость походке.",
+        impact: "Глюкозамин и хондроитин восстанавливают хрящ, сера (МСМ) снимает воспаление.",
+        cautions: "Не подходит при аллергии на креветки и ракообразных.",
+        alt: {
+          name: "Травяной сбор «Легкость движения» Herbal Tea",
+          art: "15674",
+          price: 249,
+          series: "Herbal Tea",
+          badgeClass: "badge-ph",
+          img: "images/15674.jpg",
+          purpose: "Травяной сбор для выведения лишних солей из суставов.",
+          impact: "Сабельник и полевой хвощ очищают суставы от отложений солей.",
+          cautions: "Обладает мягким мочегонным свойством."
+        }
+      },
+      bone: {
+        id: "bone",
+        name: "БАД «Поддержка костной ткани» Molecular Force",
+        art: "15845",
+        price: 1777,
+        series: "Molecular Force",
+        badgeClass: "badge-mf",
+        img: "images/15845.jpg",
+        timing: "В обед (1 капсула во время еды)",
+        purpose: "Строительный материал для крепких костей, здоровых зубов и плотных ногтей.",
+        impact: "Хелатный кальций и кремний бамбука укрепляют костную ткань и зубную эмаль.",
+        cautions: "Не принимать при повышенном уровне кальция в крови."
+      },
+      d3k2: {
+        id: "d3k2",
+        name: "БАД «Комплекс D3 + K2» Molecular Force",
+        art: "15849",
+        price: 2221,
+        series: "Molecular Force",
+        badgeClass: "badge-mf",
+        img: "images/15849.jpg",
+        timing: "Утром (1 капсула во время завтрака)",
+        purpose: "Солнечный дуэт: витамин Д3 защищает от простуд и хандры, а К2 направляет кальций строго в кости и зубы.",
+        impact: "Витамин Д3 повышает иммунитет, а витамин К2 оберегает сосуды от отложения солей кальция.",
+        cautions: "При приеме препаратов, разжижающих кровь (варфарин), проконсультируйтесь с врачом."
+      },
+      collagen: {
+        id: "collagen",
+        name: "Концентрат напитка Collagen Marine (Морской коллаген)",
+        art: "15954",
+        price: 1899,
+        series: "Collagen",
+        badgeClass: "badge-cl",
+        img: "images/15954.jpg",
+        timing: "Утром натощак (за полчаса до завтрака)",
+        purpose: "Морской коллаген молодости: делает кожу подтянутой, разглаживает морщинки, питает суставы и волосы.",
+        impact: "Глубоководный рыбный коллаген усваивается на 95%, а витамин С стимулирует выработку своего коллагена.",
+        cautions: "Не подходит при аллергии на рыбу. Пейте достаточное количество воды в течение дня.",
+        alt: {
+          name: "Концентрат коллагенового напитка «Доброген Актив»",
+          art: "15953",
+          price: 1599,
+          series: "Collagen",
+          badgeClass: "badge-cl",
+          img: "images/15953.jpg",
+          purpose: "Питательный концентрат для укрепления суставов, хрящей и связок.",
+          impact: "Гидролизат коллагена с желатином и янтарной кислотой восстанавливает связочный аппарат и хрящ.",
+          cautions: "Индивидуальная непереносимость компонентов."
+        }
+      },
+      liver: {
+        id: "liver",
+        name: "БАД «Поддержка печени» Molecular Force",
+        art: "15842",
+        price: 1039,
+        series: "Molecular Force",
+        badgeClass: "badge-mf",
+        img: "images/15842.jpg",
+        timing: "В обед (1 капсула во время еды)",
+        purpose: "Генеральная уборка для печени: защищает от последствий жирной пищи, убирает тяжесть в боку и освежает лицо.",
+        impact: "Расторопша обновляет клетки печени, артишок разгоняет желчь, фосфолипиды восстанавливают мембраны.",
+        cautions: "С осторожностью при крупных камнях в желчном пузыре.",
+        alt: {
+          name: "Травяной сбор «Очищение. Вечер» Herbal Tea",
+          art: "16113",
+          price: 199,
+          series: "Herbal Tea",
+          badgeClass: "badge-ph",
+          img: "images/16113.jpg",
+          purpose: "Вечерний чай для легкого животика и деликатного очищения к утру.",
+          impact: "Земляника, крушина, кукурузные рыльца и мята мягко освобождают кишечник.",
+          cautions: "Не пить при диарее и острых воспалениях ЖКТ."
+        }
+      }
+    };
+
+    const clinicalProfiles = {
+      stress: {
+        title: "Спокойствие, крепкие нервы и глубокий сон",
+        desc: "Программа поможет снять груз накопившейся усталости, вернуть душевное равновесие и крепко высыпаться по ночам.",
+        duration: "Оптимальный курс для восстановления нервной системы — <strong>от 30 до 60 дней (1–2 упаковки)</strong>. Организму требуется накопительный период, чтобы восполнить запасы магния и наладить естественную выработку мелатонина. При сохранении стрессовых нагрузок повторите курс после перерыва в 3–4 недели.",
+        foodTips: [
+          "• Добавьте в рацион горсть тыквенных семечек или миндаля — в них много природного магния для мышц.",
+          "• За ужином пейте теплую воду с долькой лимона, исключите крепкий черный чай и кофе после 16:00.",
+          "• Добавьте бананы и ягоды черники — они помогают организму вырабатывать гормон радости серотонин."
+        ],
+        sets: {
+          premium: ["antistress", "sleep", "q10", "omega"],
+          basic: ["antistress", "sleep", "omega"],
+          minimum: ["antistress", "sleep"]
+        }
+      },
+      joints: {
+        title: "Легкость в коленях, гибкая спина и упругая кожа",
+        desc: "Программа напитает суставы, укрепит кости и подарит коже свежесть и упругость благодаря морскому коллагену.",
+        duration: "Хрящам и связкам нужно время для обновления! Оптимальный базовый курс — <strong>от 60 до 90 дней (2–3 упаковки)</strong> без перерывов. Соединительная ткань имеет медленный обмен веществ, поэтому устойчивый результат закрепляется именно на 2–3-й месяц приема.",
+        foodTips: [
+          "• Варите домашние костные бульоны и холодец — это природный источник строительного желатина для связок.",
+          "• Ешьте больше зеленых листовых салатов, петрушки и брокколи — в них много витамина K для костей.",
+          "• Уменьшите количество рафинированного сахара: сладкое ускоряет разрушение волокон коллагена."
+        ],
+        sets: {
+          premium: ["joints", "bone", "d3k2", "collagen"],
+          basic: ["joints", "bone", "d3k2"],
+          minimum: ["joints", "bone"]
+        }
+      },
+      gastro: {
+        title: "Легкий животик, чистая печень и детокс",
+        desc: "Поможет печени справиться с нагрузками, наладит комфортное пищеварение и подарит ощущение легкости после еды.",
+        duration: "Курс мягкого очищения и гепатопротекции — <strong>30–45 дней (1–2 упаковки)</strong>. Этого времени достаточно для обновления клеток печени и нормализации пассажа желчи. Рекомендуется повторять курс 2 раза в год — весной и осенью.",
+        foodTips: [
+          "• Начинайте каждое утро со стакана теплой (около 40°C) чистой воды, чтобы мягко разбудить желчный пузырь.",
+          "• Добавьте в рацион квашеную капусту и свеклу — это лучшая природная подкормка для полезных бактерий ЖКТ.",
+          "• Старайтесь ужинать за 3 часа до сна, чтобы печень ночью отдыхала, а не переваривала тяжелую еду."
+        ],
+        sets: {
+          premium: ["liver", "q10", "omega", "d3k2"],
+          basic: ["liver", "omega", "q10"],
+          minimum: ["liver", "omega"]
+        }
+      },
+      cardio: {
+        title: "Здоровое сердечко, легкие ноги и ясная голова",
+        desc: "Укрепит сосуды, защитит от перемен погоды, уменьшит вечернюю тяжесть в ножках и добавит бодрости.",
+        duration: "Оптимальный курс для поддержки миокарда и эластичности сосудов — <strong>60 дней (2 упаковки)</strong>. При метеозависимости и повышенных нагрузках курс можно возобновлять через 1 месяц отдыха.",
+        foodTips: [
+          "• Добавьте в рацион запеченную рыбу 2 раза в неделю и льняное масло в овощные салаты.",
+          "• Ешьте курагу, печеный картофель и грецкие орехи — они богаты калием, который так любит сердечная мышца.",
+          "• Вечером полежите 10 минут с ножками, приподнятыми на подушку, чтобы разогнать застоявшуюся кровь."
+        ],
+        sets: {
+          premium: ["q10", "omega", "d3k2", "antistress"],
+          basic: ["q10", "omega", "d3k2"],
+          minimum: ["q10", "omega"]
+        }
+      },
+      energy: {
+        title: "Заряд бодрости, сильный иммунитет и сияние",
+        desc: "Поможет просыпаться с улыбкой, защитит от сезонных простуд и наполнит энергией для всех домашних и рабочих дел.",
+        duration: "Базовый курс клеточной витализации — <strong>от 30 до 60 дней (1–2 упаковки)</strong>. Идеально принимать в осенне-зимний период для поддержки иммунитета или при синдроме хронической усталости.",
+        foodTips: [
+          "• Обязательно завтракайте теплым белковым блюдом (яйца, омлет с сыром, творог) для стабильной энергии без скачков сахара.",
+          "• Добавьте в чай кусочек свежего корня имбиря и облепиху для природного иммунного щита.",
+          "• Старайтесь ложиться спать до 23:00 — именно в эти часы тело вырабатывает главный гормон восстановления."
+        ],
+        sets: {
+          premium: ["q10", "d3k2", "omega", "collagen"],
+          basic: ["q10", "d3k2", "omega"],
+          minimum: ["q10", "d3k2"]
+        }
+      }
+    };
+
+    let currentQ = 0;
+    let userAnswersHistory = [];
+    let scores = { stress: 0, joints: 0, gastro: 0, cardio: 0, energy: 0 };
+    let activeCategory = "stress";
+    let activeTier = "basic"; // По умолчанию открываем "Базовый" как самый популярный
+    let isEconomyEnabled = false;
+    let isDiscountEnabled = true;
+
+    function renderQuestion() {
+      const q = questions[currentQ];
+      document.getElementById('step-counter').innerText = `Вопрос ${currentQ + 1} из ${questions.length}`;
+      document.getElementById('progress-bar').style.width = `${((currentQ + 1) / questions.length) * 100}%`;
+      document.getElementById('question-text').innerText = q.text;
+      
+      const categoryNames = {
+        energy: "Энергия и бодрость",
+        stress: "Нервы и сон",
+        gastro: "Животик и пищеварение",
+        joints: "Суставы и спина",
+        cardio: "Сердечко и сосуды"
+      };
+      document.getElementById('category-badge').innerText = categoryNames[q.cat] || "Тест";
+
+      // Управление кнопкой "Назад"
+      const btnPrev = document.getElementById('btn-prev-q');
+      if (currentQ > 0) {
+        btnPrev.classList.remove('hidden');
+        btnPrev.classList.add('inline-flex');
+      } else {
+        btnPrev.classList.add('hidden');
+        btnPrev.classList.remove('inline-flex');
+      }
+
+      const cont = document.getElementById('options-container');
+      cont.innerHTML = '';
+      
+      const letterMap = ['A', 'B', 'C'];
+      const styleConfig = [
+        {
+          border: 'border-stone-200 hover:border-emerald-500 hover:bg-emerald-50/30',
+          badgeBg: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+          tagBg: 'bg-emerald-50 text-emerald-700 border-emerald-200'
+        },
+        {
+          border: 'border-stone-200 hover:border-amber-500 hover:bg-amber-50/30',
+          badgeBg: 'bg-amber-50 text-amber-800 border-amber-200',
+          tagBg: 'bg-amber-50 text-amber-700 border-amber-200'
+        },
+        {
+          border: 'border-stone-200 hover:border-rose-500 hover:bg-rose-50/30',
+          badgeBg: 'bg-rose-50 text-rose-800 border-rose-200',
+          tagBg: 'bg-rose-50 text-rose-700 border-rose-200'
+        }
+      ];
+
+      q.opts.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        const cfg = styleConfig[idx] || styleConfig[0];
+        
+        btn.className = `option-card w-full text-left p-3.5 sm:p-4 rounded-2xl border ${cfg.border} bg-white transition-all shadow-xs flex items-center justify-between gap-3 group`;
+        btn.innerHTML = `
+          <div class="flex items-center gap-3 sm:gap-3.5 flex-1 min-w-0">
+            <span class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl ${cfg.badgeBg} border font-bold text-xs sm:text-sm flex items-center justify-center flex-shrink-0">
+              ${letterMap[idx]}
+            </span>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-0.5">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full border ${cfg.tagBg}">
+                  ${opt.tag}
+                </span>
+              </div>
+              <span class="text-xs sm:text-sm text-stone-800 font-medium leading-snug block">${opt.t}</span>
+            </div>
+          </div>
+          <div class="w-7 h-7 rounded-xl bg-stone-100 group-hover:bg-emerald-600 group-hover:text-white text-stone-400 flex items-center justify-center font-bold text-xs transition-all flex-shrink-0">
+            →
+          </div>
+        `;
+        btn.onclick = () => {
+          // Сохраняем в историю для возможности отката "Назад"
+          userAnswersHistory.push({ cat: q.cat, weight: opt.w });
+          scores[q.cat] = (scores[q.cat] || 0) + opt.w;
+          currentQ++;
+          if (currentQ < questions.length) {
+            renderQuestion();
+          } else {
+            finalizeDiagnosis();
+          }
+        };
+        cont.appendChild(btn);
+      });
+    }
+
+    function previousQuestion() {
+      if (currentQ > 0 && userAnswersHistory.length > 0) {
+        const lastAnswer = userAnswersHistory.pop();
+        scores[lastAnswer.cat] = Math.max(0, (scores[lastAnswer.cat] || 0) - lastAnswer.weight);
+        currentQ--;
+        renderQuestion();
+      }
+    }
+
+    function finalizeDiagnosis() {
+      let maxScore = -1;
+      let topCat = "stress";
+      for (let c in scores) {
+        if (scores[c] > maxScore) {
+          maxScore = scores[c];
+          topCat = c;
+        }
+      }
+      activeCategory = clinicalProfiles[topCat] ? topCat : "stress";
+
+      document.getElementById('quiz-container').classList.add('hidden');
+      document.getElementById('result-container').classList.remove('hidden');
+      document.getElementById('step-counter').innerText = 'Завершено';
+
+      renderHealthBars();
+      calculateWaterIntake();
+      updateTierTabPrices();
+      renderResults();
+    }
+
+    function renderHealthBars() {
+      const barContainer = document.getElementById('health-bars');
+      barContainer.innerHTML = '';
+      
+      const categories = [
+        { key: 'stress', label: 'Нервная система и крепкий сон' },
+        { key: 'joints', label: 'Суставы, кости и гибкость спины' },
+        { key: 'gastro', label: 'Животик, пищеварение и печень' },
+        { key: 'cardio', label: 'Сердце, сосуды и легкость в ногах' },
+        { key: 'energy', label: 'Бодрость и иммунитет от простуд' }
+      ];
+
+      categories.forEach(c => {
+        const val = scores[c.key] || 0;
+        const percent = Math.min(Math.round((val / 9) * 100), 100);
+        let colorClass = "from-emerald-400 to-teal-500";
+        let status = "В норме";
+        if (percent > 60) {
+          colorClass = "from-rose-500 to-red-600";
+          status = "Требуется забота";
+        } else if (percent > 30) {
+          colorClass = "from-amber-400 to-orange-500";
+          status = "Стоит укрепить";
+        }
+
+        const row = document.createElement('div');
+        row.className = "text-xs";
+        row.innerHTML = `
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-medium text-stone-700">${c.label}</span>
+            <span class="font-bold text-stone-900 text-[11px]">${status}</span>
+          </div>
+          <div class="w-full bg-stone-200/80 rounded-full h-1.5 overflow-hidden">
+            <div class="bg-gradient-to-r ${colorClass} h-1.5 rounded-full transition-all duration-500" style="width: ${Math.max(percent, 10)}%"></div>
+          </div>
+        `;
+        barContainer.appendChild(row);
+      });
+    }
+
+    function calculateWaterIntake() {
+      const weight = parseFloat(document.getElementById('user-weight').value) || 68;
+      const liters = ((weight * 30) / 1000).toFixed(1);
+      document.getElementById('water-result').innerHTML = `Ваша норма: <strong>~${liters} литра чистой воды в день</strong>`;
+    }
+
+    // Подсчет цен сразу внутри вкладок выбора наборов (UX-улучшение)
+    function updateTierTabPrices() {
+      const profile = clinicalProfiles[activeCategory];
+      ['premium', 'basic', 'minimum'].forEach(tier => {
+        const keys = profile.sets[tier];
+        let tierTotal = 0;
+        keys.forEach(k => {
+          const prod = productsCatalog[k];
+          const activeItem = (isEconomyEnabled && prod.alt) ? prod.alt : prod;
+          tierTotal += isDiscountEnabled ? Math.round(activeItem.price * 0.8) : activeItem.price;
+        });
+        const el = document.getElementById(`tier-price-${tier}`);
+        if (el) el.innerText = `${tierTotal.toLocaleString('ru-RU')} ₽`;
+      });
+    }
+
+    function selectTier(tier) {
+      activeTier = tier;
+      ['premium', 'basic', 'minimum'].forEach(t => {
+        const btn = document.getElementById(`tab-${t}`);
+        if (t === tier) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      renderResults();
+    }
+
+    function toggleEconomy() {
+      isEconomyEnabled = document.getElementById('economy-toggle').checked;
+      updateTierTabPrices();
+      renderResults();
+    }
+
+    function toggleDiscount() {
+      isDiscountEnabled = document.getElementById('discount-toggle').checked;
+      updateTierTabPrices();
+      renderResults();
+    }
+
+    function renderResults() {
+      const profile = clinicalProfiles[activeCategory];
+      document.getElementById('dominant-title').innerText = profile.title;
+      document.getElementById('dominant-desc').innerText = profile.desc;
+      document.getElementById('print-focus-title').innerText = `Фокус: ${profile.title}`;
+      document.getElementById('course-duration-text').innerHTML = profile.duration;
+
+      // Обновляем подсказки по питанию (для экрана)
+      const foodBox = document.getElementById('food-tips-content');
+      if (foodBox) {
+        foodBox.innerHTML = profile.foodTips.map(tip => `<p>${tip}</p>`).join('');
+      }
+
+      const keys = profile.sets[activeTier];
+      const listContainer = document.getElementById('products-list');
+      const clinicalContainer = document.getElementById('clinical-details');
+      listContainer.innerHTML = '';
+      clinicalContainer.innerHTML = '';
+
+      let retailTotal = 0;
+      let finalTotal = 0;
+      let schedule = { morning: [], day: [], evening: [] };
+
+      keys.forEach(key => {
+        const prod = productsCatalog[key];
+        const isReplaced = isEconomyEnabled && Boolean(prod.alt);
+        const activeItem = isReplaced ? prod.alt : prod;
+
+        const basePrice = activeItem.price;
+        const clientPrice = Math.round(basePrice * 0.8);
+
+        retailTotal += basePrice;
+        finalTotal += isDiscountEnabled ? clientPrice : basePrice;
+
+        // Распределение по графику приема
+        const timeDetail = prod.timing.split('(')[1] ? prod.timing.split('(')[1].replace(')', '') : '';
+        if (prod.timing.toLowerCase().includes('утром')) {
+          schedule.morning.push({ name: activeItem.name, art: activeItem.art, dose: timeDetail });
+        } else if (prod.timing.toLowerCase().includes('обед')) {
+          schedule.day.push({ name: activeItem.name, art: activeItem.art, dose: timeDetail });
+        } else {
+          schedule.evening.push({ name: activeItem.name, art: activeItem.art, dose: timeDetail });
+        }
+
+        // Карточка на экране (с фото)
+        const card = document.createElement('div');
+        card.className = "p-3 sm:p-4 rounded-2xl border border-stone-200/90 bg-white hover:border-emerald-300 transition-all shadow-xs flex flex-col sm:flex-row gap-3 sm:gap-3.5 items-center";
+        
+        const fallbackSVG = encodeURIComponent(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" fill="none">
+            <rect width="96" height="96" rx="16" fill="#f5f5f4"/>
+            <path d="M48 28V68M28 48H68" stroke="#059669" stroke-width="4" stroke-linecap="round"/>
+            <text x="48" y="80" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="bold" fill="#78716c">${activeItem.art}</text>
+          </svg>
+        `);
+
+        card.innerHTML = `
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-stone-50 border border-stone-200/70 flex-shrink-0 flex items-center justify-center p-1 overflow-hidden">
+            <img 
+              src="${activeItem.img}" 
+              alt="${activeItem.name}" 
+              loading="lazy"
+              class="max-h-full max-w-full object-contain transition-transform duration-300 hover:scale-105"
+              onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,${fallbackSVG}';"
+            >
+          </div>
+          <div class="flex-1 text-center sm:text-left min-w-0">
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 mb-1">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-md ${activeItem.badgeClass}">${activeItem.series}</span>
+              <span class="text-xs text-stone-500 font-semibold">Арт. ${activeItem.art}</span>
+              ${isReplaced ? '<span class="text-[10px] font-bold text-amber-800 bg-amber-100 border border-amber-200 px-2 py-0.5 rounded-md">Эконом-замена</span>' : ''}
+            </div>
+            <h4 class="font-bold text-stone-900 text-sm sm:text-base leading-snug">${activeItem.name}</h4>
+            <p class="text-xs text-stone-600 mt-0.5 leading-relaxed line-clamp-2 sm:line-clamp-none">${activeItem.purpose}</p>
+            <div class="text-[11px] text-emerald-800 font-semibold mt-1 flex items-center justify-center sm:justify-start gap-1">
+              <span>🕒</span> ${prod.timing}
+            </div>
+          </div>
+          <div class="text-center sm:text-right flex-shrink-0">
+            <div class="text-base sm:text-lg font-extrabold text-stone-900">
+              ${(isDiscountEnabled ? clientPrice : basePrice).toLocaleString('ru-RU')} ₽
+            </div>
+            ${isDiscountEnabled ? `<div class="text-xs text-stone-400 line-through">${basePrice.toLocaleString('ru-RU')} ₽</div>` : ''}
+          </div>
+        `;
+        listContainer.appendChild(card);
+
+        // Компактный блок деталей приема для памятки на холодильник
+        const detailBlock = document.createElement('div');
+        detailBlock.className = "p-2 sm:p-2.5 rounded-lg bg-stone-50 border border-stone-200/80 text-[10.5px] sm:text-xs text-stone-700 leading-snug print-box";
+        detailBlock.innerHTML = `
+          <div class="flex justify-between items-baseline mb-0.5">
+            <span class="font-bold text-stone-900 text-xs">${activeItem.name} <span class="text-stone-500 font-normal">(арт. ${activeItem.art})</span></span>
+            <span class="text-emerald-800 font-bold text-[10px]">${prod.timing}</span>
+          </div>
+          <div class="text-stone-600"><strong class="text-stone-800">Польза:</strong> ${activeItem.purpose}</div>
+        `;
+        clinicalContainer.appendChild(detailBlock);
+      });
+
+      document.getElementById('total-price').innerText = `${finalTotal.toLocaleString('ru-RU')} ₽`;
+      
+      // Рефрейминг цены: расчет стоимости в день (курс на 30 дней)
+      const perDay = Math.round(finalTotal / 30);
+      document.getElementById('price-per-day-badge').innerText = `Инвестиция в здоровье: всего ~${perDay} ₽ в день`;
+
+      const approxPoints = Math.round(finalTotal / 150);
+      document.getElementById('points-badge').innerText = `~${approxPoints} Баллов`;
+
+      if (isDiscountEnabled) {
+        const diff = retailTotal - finalTotal;
+        document.getElementById('savings-badge').innerText = `С учетом скидки 20% (Вы экономите: ${diff.toLocaleString('ru-RU')} ₽)`;
+        document.getElementById('retail-compare-price').innerText = `Обычная цена каталога: ${retailTotal.toLocaleString('ru-RU')} ₽`;
+      } else {
+        document.getElementById('savings-badge').innerText = `Цены официального каталога Faberlic`;
+        document.getElementById('retail-compare-price').innerText = ``;
+      }
+
+      // Генерация сетки расписания (Утро / День / Вечер) с галочками [ ] для памятки
+      const sched = document.getElementById('schedule-blocks');
+      sched.innerHTML = `
+        <div class="p-2 sm:p-2.5 rounded-lg bg-amber-50/80 border border-amber-200/70 print-box">
+          <div class="text-[11px] sm:text-xs font-bold text-amber-950 uppercase tracking-wider mb-1 flex items-center justify-between">
+            <span>🌅 Утро (Завтрак)</span>
+            <span class="print-only text-[9pt] text-amber-900 font-bold">галочка:</span>
+          </div>
+          <div class="text-[10px] sm:text-xs text-stone-700 space-y-0.5">
+            ${schedule.morning.length ? schedule.morning.map(item => `<div class="flex items-start gap-1"><span class="font-mono text-stone-400 font-bold">[  ]</span> <span><strong>${item.name}</strong> <span class="text-stone-500">(${item.dose})</span></span></div>`).join('') : '<span class="text-stone-400">—</span>'}
+          </div>
+        </div>
+        <div class="p-2 sm:p-2.5 rounded-lg bg-emerald-50/80 border border-emerald-200/70 print-box">
+          <div class="text-[11px] sm:text-xs font-bold text-emerald-950 uppercase tracking-wider mb-1 flex items-center justify-between">
+            <span>☀️ День (Обед)</span>
+            <span class="print-only text-[9pt] text-emerald-900 font-bold">галочка:</span>
+          </div>
+          <div class="text-[10px] sm:text-xs text-stone-700 space-y-0.5">
+            ${schedule.day.length ? schedule.day.map(item => `<div class="flex items-start gap-1"><span class="font-mono text-stone-400 font-bold">[  ]</span> <span><strong>${item.name}</strong> <span class="text-stone-500">(${item.dose})</span></span></div>`).join('') : '<span class="text-stone-400">—</span>'}
+          </div>
+        </div>
+        <div class="p-2 sm:p-2.5 rounded-lg bg-teal-50/80 border border-teal-200/70 print-box">
+          <div class="text-[11px] sm:text-xs font-bold text-teal-950 uppercase tracking-wider mb-1 flex items-center justify-between">
+            <span>🌙 Вечер / Сон</span>
+            <span class="print-only text-[9pt] text-teal-900 font-bold">галочка:</span>
+          </div>
+          <div class="text-[10px] sm:text-xs text-stone-700 space-y-0.5">
+            ${schedule.evening.length ? schedule.evening.map(item => `<div class="flex items-start gap-1"><span class="font-mono text-stone-400 font-bold">[  ]</span> <span><strong>${item.name}</strong> <span class="text-stone-500">(${item.dose})</span></span></div>`).join('') : '<span class="text-stone-400">—</span>'}
+          </div>
+        </div>
+      `;
+    }
+
+    function showToast(text) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-text').innerText = text;
+      toast.classList.remove('opacity-0', 'translate-y-[-16px]');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-[-16px]');
+      }, 2400);
+    }
+
+    function copyArticlesToClipboard() {
+      const profile = clinicalProfiles[activeCategory];
+      const keys = profile.sets[activeTier];
+      const arts = keys.map(k => {
+        const prod = productsCatalog[k];
+        return (isEconomyEnabled && prod.alt) ? prod.alt.art : prod.art;
+      });
+      const textToCopy = arts.join(', ');
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        showToast(`Артикулы [${textToCopy}] скопированы!`);
+      }).catch(() => {
+        prompt("Скопируйте артикулы для быстрого заказа:", textToCopy);
+      });
+    }
+
+    function printChecklist() {
+      window.print();
+    }
+
+    function shareRecommendation() {
+      const profile = clinicalProfiles[activeCategory];
+      const keys = profile.sets[activeTier];
+      const names = keys.map(k => {
+        const prod = productsCatalog[k];
+        const item = (isEconomyEnabled && prod.alt) ? prod.alt : prod;
+        return `• ${item.name} (арт. ${item.art})`;
+      }).join('\n');
+      
+      const shareText = `Моя персональная программа Faberlic от команды «Бумеранг»:\nЦель: ${profile.title}\n\nВыбранный набор (${activeTier.toUpperCase()}):\n${names}\n\nСохраняю себе для заказа!`;
+      
+      if (navigator.share) {
+        navigator.share({
+          title: 'Моя программа Faberlic | Команда «Бумеранг»',
+          text: shareText
+        }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(shareText).then(() => {
+          showToast('Список скопирован в буфер!');
+        });
+      }
+    }
+
+    function restartQuiz() {
+      currentQ = 0;
+      userAnswersHistory = [];
+      scores = { stress: 0, joints: 0, gastro: 0, cardio: 0, energy: 0 };
+      document.getElementById('result-container').classList.add('hidden');
+      document.getElementById('quiz-container').classList.remove('hidden');
+      renderQuestion();
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>
